@@ -17,4 +17,3 @@ for i in range(len(left)):
     if x < 0:
         x *= -1 
     distance += x
-
