@@ -1,6 +1,7 @@
+#### Part I -- Finding the Distance
+
 left = []
 right = []
-
 distance = 0 
 
 with open("data.txt", "r") as file:
@@ -17,3 +18,23 @@ for i in range(len(left)):
     if x < 0:
         x *= -1 
     distance += x
+
+print(f'Distance is {distance}')
+
+#### Part II -- FInding Similarity Score
+hash_right = {}
+similarity_score = 0
+
+for i in right:
+    if i not in hash_right:
+        hash_right[i] = 1
+    else:
+        hash_right[i] += 1
+
+for i in left: 
+    if i not in hash_right:
+        pass
+    else:
+        similarity_score += i * hash_right[i]
+
+print(f'Similarity Score is {similarity_score}')
