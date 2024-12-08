@@ -36,7 +36,7 @@ print(f'{answer} Codes are Safe')
 
 #Part II 
 safe_codes_part_two = []
-
+print(all_codes)
 for code in all_codes:
     damper = False 
     safe = True
@@ -65,4 +65,4 @@ for code in all_codes:
     if safe == True:
         safe_codes_part_two.append(code)
 
-print(len(safe_codes_part_two))
+print(len(safe_codes))
