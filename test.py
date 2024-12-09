@@ -1,20 +1,21 @@
-#Part II -- Day 2: Red-Nosed Reports
+#Part II 
 safe_codes = []
-badone = [67, 66, 68, 70, 71, 74, 76]
 
 def is_safe(list) -> bool:
     if len(list) < 2:
         return True
+    
     left, right = 0, 1
     damper_used = False    
 
-    increasing = list[left] + list[left + 1] < list[right + 1] + list[right + 2]
+    increasing = list[left] < list[right] 
 
     while right < len(list):
         diff = list[right] - list[left]
         
-        if abs(diff) > 3 or abs(diff) == 0 or (increasing and diff <= 0) or (not increasing and diff >= 0):
+        if abs(diff) > 3 or abs(diff) == 0 or (increasing and diff < 0) or (not increasing and diff > 0):
             if damper_used:
+                print(f'Nope this {list} is not good!')
                 return False
             damper_used = True
 
@@ -28,13 +29,24 @@ def is_safe(list) -> bool:
                         right += 2
                         left += 2
                 else:
+                    print(f'Nope this {list} is not good!')
                     return False
             else:
                 return True
         else:
             left += 1
             right += 1
-
     return True
+        
 
-print(is_safe(badone))
+with open("data.txt", "r") as file: 
+    for line in file:
+        strip = line.rstrip().split()
+        temp = []
+        for i in strip:
+            temp.append(int(i))
+        
+        if is_safe(temp) == True:
+            safe_codes.append(temp)
+
+print(len(safe_codes))
