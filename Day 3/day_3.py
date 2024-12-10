@@ -20,19 +20,18 @@ for match in dont_matches:
     hash[match.span()[0]] = False
 
 
+total = 0 
+enabled = True
+counter = 0 
 for hit in hits:
-    temp = hit.group()
-    print(temp)
-
-# total = 0 
-# enabled = True
-# counter = 0 
-# for hit in hits:
-#     start = hit.span()[0]
-#     while counter != start:
-#         counter += 1
-#         if counter in hash:
-#             enabled = hash[counter]
+    start = hit.span()[0]
+    while counter != start:
+        counter += 1
+        if counter in hash:
+            enabled = hash[counter]
     
-#     if enabled:
+    if enabled:
+        temp = re.findall('\d+', hit.group())
+        total += int(temp[0]) * int(temp[1])
 
+print(total)
