@@ -5,7 +5,21 @@ total_counter = 0
 pattern1 = "XMAS"
 pattern2 = "SAMX"
 
+### solution for part 2
+def count_x_in_matrix(matrix):
+    total = 0
+    rows, cols = len(matrix), len(matrix[0]) 
 
+    for i in range(1, rows - 1, 1):
+        for j in range(1, cols - 1, 1):
+            if matrix[i][j] == 'A':
+                if (matrix[i - 1][j - 1] == 'M' and  matrix[i + 1][j + 1] == 'S') or (matrix[i - 1][j - 1] == 'S' and  matrix[i + 1][j + 1] == 'M'):
+                    if (matrix[i - 1][j + 1] == 'M' and  matrix[i + 1][j - 1] == 'S') or (matrix[i - 1][j + 1] == 'S' and  matrix[i + 1][j - 1] == 'M'):
+                        total += 1
+    return total
+
+
+#solution for part 1
 def count_pattern_in_matrix(matrix, pattern):
     total = 0
     rows, cols = len(matrix), len(matrix[0])
@@ -28,7 +42,6 @@ def count_pattern_in_matrix(matrix, pattern):
 
 
 
-
 with open("day_4_data.txt", "r") as file:
     content = file.read()
     # Horizontal matches
@@ -41,4 +54,5 @@ with open("day_4_data.txt", "r") as file:
 total_counter += count_pattern_in_matrix(matrix, pattern1)
 total_counter += count_pattern_in_matrix(matrix, pattern2)
 
-print(total_counter)
+print(f'Solution for Part 1 is {total_counter}')
+print(f'Solution for Part 2 is {count_x_in_matrix(matrix)}')
