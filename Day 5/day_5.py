@@ -2,6 +2,7 @@ import re
 
 hash_rules = {}
 correct_updates = []
+total = 0
 
 with open("day_5_data.txt", "r") as file:
     content = file.read()
@@ -13,9 +14,9 @@ with open("day_5_data.txt", "r") as file:
     for rule in rules:
         x, y = map(int, rule.group().split("|"))
         if x not in hash_rules:
-            hash_rules[x] = [y]
+            hash_rules[x] = {y}
         else:
-            hash_rules[x].append(y)
+            hash_rules[x].add(y)
 
     all_content = content.split("\n")
     all_updates = []
@@ -24,8 +25,23 @@ with open("day_5_data.txt", "r") as file:
             pass
         else:
             all_updates.append(list(map(int, c.split(","))))
+    
+    temp_set = set()
 
-    temp_set = {}
     for update in all_updates:
-        
-        if temp_set in hash_rules[update]:
+        broke = False
+        for n in update:
+            temp_set.add(n)
+            if n not in hash_rules:
+                pass
+            else:
+                if temp_set.isdisjoint(hash_rules[n]) == False:
+                    temp_set = set()
+                    broke = True
+                    break
+
+        if broke == False:
+            correct_updates.append(update)
+            total += update[(len(update) // 2)]
+        temp_set = set()
+print(total)
