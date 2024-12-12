@@ -47,17 +47,3 @@ with open("day_5_data.txt", "r") as file:
             total += update[(len(update) // 2)]
         temp_set = set()
 print(total)
-
-
-### PART II ###
-
-
-for update in incorrect_updates:
-    temp = []
-    for n in update:
-        temp_set = hash_rules[n]
-        if temp:
-            for i in temp:
-                # print(i)
-        else:
-            temp.append(n)
