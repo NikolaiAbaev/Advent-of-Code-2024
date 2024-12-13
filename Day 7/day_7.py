@@ -18,14 +18,14 @@ def check_hash(target, numbers):
         next_number = numbers[index]
  
         return (helper(current + next_number, index + 1) or 
-                helper(current * next_number, index + 1))
+                helper(current * next_number, index + 1) or
+                helper(int(str(current) + str(next_number)), index + 1))
     
     return helper(numbers[0], 1)
 
 
 for key, value in hash.items():
      if check_hash(key, value):
-        print(key)
         counter += key
 
 print(counter)
