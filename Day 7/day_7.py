@@ -21,7 +21,7 @@ def check_hash(target, numbers):
                 helper(current * next_number, index + 1) or
                 helper(int(str(current) + str(next_number)), index + 1))
     
-    return helper(numbers[0], 1)
+    return helper(numbers[0], 1)   
 
 
 for key, value in hash.items():
