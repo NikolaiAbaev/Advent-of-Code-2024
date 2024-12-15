@@ -21,17 +21,19 @@ for column in range(cols):
 
 
 for key, value in antenna_hash.items():
-    for v in range(len(value)):
-        for j in range(v + 1, len(value)):
-            r1, c1 = value[v]
+    for i in range(len(value)):
+        for j in range(len(value)):
+            if i == j: continue
+
+            r1, c1 = value[i]
             r2, c2 = value[j]
             dr, dc = r2 - r1, c2 - c1
-            
-            location_1 = (r1 - dr, c1 -dc)
-            if -1 < location_1[0] < cols and -1 < location_1[1] < rows:
-                unique_locations.add(tuple(location_1))
-            
-            location_2 = (r2 + dr, c2 + dc)
-            if -1 < location_2[0] < cols and -1 < location_2[1] < cols:
-                unique_locations.add(tuple(location_2))
+            r = r1
+            c = c1 
 
+            while -1 < r < rows and -1 < c < cols:
+                unique_locations.add((r, c))
+                r += dr
+                c += dc 
+
+print(len(unique_locations)) 

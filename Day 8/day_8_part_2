@@ -27,11 +27,23 @@ for key, value in antenna_hash.items():
             r2, c2 = value[j]
             dr, dc = r2 - r1, c2 - c1
             
-            location_1 = (r1 - dr, c1 -dc)
-            if -1 < location_1[0] < cols and -1 < location_1[1] < rows:
+            location_1 = (r1 - dr, c1 - dc)
+            while -1 < location_1[0] < cols and -1 < location_1[1] < rows:
                 unique_locations.add(tuple(location_1))
-            
+                location_1 = (location_1[0] - dr, location_1[1] - dc)
+
             location_2 = (r2 + dr, c2 + dc)
-            if -1 < location_2[0] < cols and -1 < location_2[1] < cols:
+            while -1 < location_2[0] < cols and -1 < location_2[1] < cols:
                 unique_locations.add(tuple(location_2))
+                location_2 = (location_2[0] + dr, location_2[1] + dc)
+
+print(len(unique_locations))
+
+
+for value in antenna_hash:
+    for item in antenna_hash[value]:
+        unique_locations.add(tuple(item))
+
+print(len(unique_locations))
+
 
